@@ -2,8 +2,9 @@
 
 set -e
 
-cd /var/www/laravel
-rm -f public/storage
+php artisan package:discover
+chown www-data:www-data bootstrap/cache
+chown -R www-data:www-data storage/
 
 echo 'migrate'
 # php artisan migrate
