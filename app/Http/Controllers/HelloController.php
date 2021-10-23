@@ -32,6 +32,7 @@ class HelloController extends Controller
         $user = User::query()
             ->firstOrCreate([
                 'name' => 'fdsfdsf',
+                'email' => time() . rand(100, 999) . '@' . rand(100, 999) . '.com',
             ]);
         Cache::put('user_name', $name, 60);
         return $name . ' 创建完成';

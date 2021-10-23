@@ -12,14 +12,15 @@ RUN apt-get update && apt-get install -y \
     imagemagick \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
-    libpng-dev
+    libpng-dev \
+    && pecl install -o -f redis &&  rm -rf /tmp/pear
 
 # 配置 php 扩展
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 # 安装 php 扩展
 RUN docker-php-ext-install -j$(nproc) gd pdo_mysql
 # 启动 php 扩展
-RUN docker-php-ext-enable gd pdo_mysql
+RUN docker-php-ext-enable gd pdo_mysql redis
 
 # RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
